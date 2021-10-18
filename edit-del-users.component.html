@@ -1,0 +1,82 @@
+<body><div *ngIf="userData">
+    <h3 class="text-center">Edit/Delete Data</h3>
+    <div class="container" *ngFor="let data of userData">
+      <div id="panel" style="background-color:rgb(180, 255, 157)" *ngIf="!showEditUserForm" class="user-data panel">
+        <div>
+          <div>
+            <h4> Name: {{data.name}}</h4>
+          </div>
+          <div>
+            <h4> Email: {{data.email}}</h4>
+          </div>
+          <div>
+            <h4> Gender: {{data.gender}}</h4>
+          </div>
+          <div>
+            <h4> Department: {{data.dept}}</h4>
+          </div>
+          <div>
+            <h4> Salary: {{data.sal}}</h4>
+          </div>
+        </div>
+        <div>
+          <button style="margin: 4px;" class="btn btn-primary" (click)="editUser($event, data)">
+            <i class="fas fa-edit"></i> Edit User
+          </button>
+          <button style="margin: 4px;" class="btn btn-danger" (click)="deleteUser($event, data)">
+            <i class="fas fa-trash"></i> Delete User
+          </button>
+        </div>
+  
+        <div>
+          <div class="status" *ngIf="userDeleted && data.id === userDeletedId">
+            User Deleted Sucessfully.
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div id = "panel" class="container" *ngIf="showEditUserForm">
+      <div class="create-block">
+        <div>
+          <h3>Edit User:</h3>
+        </div>
+        <form [formGroup]="editUserForm" (submit)="editUserData($event, editUserForm)">
+          <div class="form-group row">
+            <label class="col-sm-3" for="name">Name:</label>
+            <input class="col-sm-9" type="text" placeholder="Enter name" id="email" formControlName="name">
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3" for="username">Gender:</label>
+            <select class="col-sm-9" type="text" id="gender" formControlName="gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3" for="email">Email:</label>
+            <input class="col-sm-9" type="email" placeholder="Enter email" id="email" formControlName="email">
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3" for="id">Department:</label>
+            <select class="col-sm-9" type="text" id="dept" formControlName="dept">
+              <option value="Software">Software</option>
+              <option value="Hardware">Hardware</option>
+              <option value="Architecture">Architecture</option>
+              <option value="Network">Network</option>
+            </select>
+          </div>
+        <div class="form-group row">
+            <label class="col-sm-3" for="sal">Salary:</label>
+            <input class="col-sm-9" type="sal" placeholder="Enter Salary" id="sal" formControlName="sal">
+          </div>
+          <button class="btn btn-primary" type="submit">Edit User</button>
+        </form>
+  
+        <div class="status" *ngIf="userEdited">
+          User Edited Sucessfully.
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
